@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Contato | MuitoMaisEmpregos</title>
+<style>
+    body { margin: 0; font-family: Arial, sans-serif; background-color: #f4f4f4; color: #333; }
+    header { background-color: #00778c; color: white; padding: 30px 10px 20px; text-align: center; }
+    header h1 { margin: 0; font-size: 24px; }
+    header p { margin-top: 5px; font-size: 14px; font-style: italic; }
+    .container { max-width: 800px; margin: 30px auto; padding: 0 20px 40px; background-color: white; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .container h2 { margin-top: 30px; color: #00778c; }
+    .container p { font-size: 15px; line-height: 1.7; margin-bottom: 20px; text-align: justify; }
+    form { display: flex; flex-direction: column; gap: 15px; }
+    input, textarea, button {
+      font-size: 15px; padding: 12px; border-radius: 6px; border: 1px solid #ccc;
+    }
+    button {
+      background-color: #00778c; color: white; border: none; font-weight: bold;
+      transition: 0.3s; cursor: pointer;
+    }
+    button:hover { background-color: #0095a4; }
+    footer { text-align: center; font-size: 13px; padding: 30px 10px 15px; background-color: #f0f0f0; color: #555; }
+    footer nav { margin-top: 10px; }
+    footer a { color: #00778c; margin: 0 8px; text-decoration: none; font-weight: bold; }
+  </style>
+</head>
+<body>
+<header>
+<h1>MuitoMaisEmpregos</h1>
+<p>Transformando buscas em conquistas — entre em contato conosco</p>
+</header>
+<div class="container">
+<h2>Fale com a gente</h2>
+<p>Tem alguma dúvida, sugestão ou quer apenas trocar uma ideia? Preencha o formulário abaixo e responderemos o mais rápido possível. Seu contato é muito importante pra nós!</p>
+<form data-netlify="true" method="POST" name="contato">
+<input name="nome" placeholder="Seu nome completo" required="" type="text"/>
+<input name="email" placeholder="Seu e-mail" required="" type="email"/>
+<textarea name="mensagem" placeholder="Sua mensagem" required="" rows="6"></textarea>
+<button type="submit">Enviar mensagem</button>
+</form>
+</div>
+<footer>
+<p>© 2025 <strong>MuitoMaisEmpregos.com.br</strong> — Ajudando brasileiros a conquistar oportunidades todos os dias.</p>
+<nav>
+<a href="index.html">Home</a> |
+      <a href="cursos.html">Cursos</a> |
+      <a href="blog.html">Blog</a> |
+      <a href="sobre.html">Sobre</a> |
+      <a href="contato.html">Contato</a> |
+      <a href="politica.html">Política</a>
+</nav>
+</footer>
+</body>
+</html>

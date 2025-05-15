@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Resultados de Vagas – MuitoMaisEmpregos</title>
+<style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #fff;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background: #004d61;
+      color: white;
+      padding: 2rem 1rem 1rem;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 2rem;
+      margin: 0;
+    }
+    .subfrase {
+      margin-top: 0.5rem;
+      font-size: 1rem;
+      color: #cceef3;
+      font-style: italic;
+      transition: opacity 0.4s ease;
+    }
+    main {
+      flex: 1;
+      padding: 2rem 1rem 4rem;
+      max-width: 800px;
+      margin: auto;
+    }
+    .vaga {
+      background: #fff;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .vaga h2 {
+      font-size: 1.1rem;
+      margin-bottom: 0.3rem;
+    }
+    .vaga p {
+      margin: 0.2rem 0;
+      font-size: 0.95rem;
+    }
+    .vaga a {
+      display: inline-block;
+      margin-top: 0.5rem;
+      color: #00778c;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    .dica {
+      background:#f4f4f4;
+      border-radius:8px;
+      padding:1rem;
+      margin:2rem 0;
+      box-shadow:0 2px 4px rgba(0,0,0,0.04);
+      font-size:0.9rem;
+      color:#444;
+      text-align:center;
+    }
+    .dica a {
+      color:#004d61;
+      text-decoration:underline;
+      font-weight:bold;
+    }
+    #carregar {
+      margin: 2rem auto;
+      padding: 0.8rem 2rem;
+      font-size: 1rem;
+      background: #00778c;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      display: none;
+    }
+    footer {
+      background: #f8f8f8;
+      padding: 2rem 1rem 3.5rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #555;
+    }
+    footer a {
+      margin: 0 0.4rem;
+      color: #004d61;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+<header>
+<h1>MuitoMaisEmpregos</h1>
+<div class="subfrase" id="subfrase">Conectando oportunidades reais...</div>
+</header>
+<main id="vagas-lista">Carregando vagas em tempo real...</main>
+<button id="carregar" onclick="carregarMais()">Ver mais vagas</button>
+<footer>
+<p>© 2025 <strong>MuitoMaisEmpregos.com.br</strong> — Ajudando brasileiros a conquistar oportunidades todos os dias.</p>
+<nav>
+<a href="index.html">Home</a> |
+        <a href="cursos.html">Cursos</a> |
+        <a href="blog.html">Blog</a> |
+        <a href="sobre.html">Sobre</a> |
+        <a href="contato.html">Contato</a> |
+        <a href="politica.html">Política</a>
+</nav>
+</footer>
+
+<div id="resultados"></div>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const urlParams = new URLSearchParams(window.location.search);
+  const cargo = urlParams.get("cargo") || "";
+  const cidade = urlParams.get("cidade") || "";
+
+  const resultadosContainer = document.getElementById("resultados");
+  resultadosContainer.innerHTML = "<p>Carregando vagas...</p>";
+
+  fetch(`https://api.zuma.jobs/api/v1/jobs?app_id=63dd91d054c6137bddaff6f72cc3c318&app_key=495b5a6b&q=${cargo}&l=${cidade}`)
+    .then(response => response.json())
+    .then(data => {
+      resultadosContainer.innerHTML = "";
+      if (data && data.results && data.results.length > 0) {
+        data.results.forEach((vaga, index) => {
+          const vagaDiv = document.createElement("div");
+          vagaDiv.className = "card";
+          vagaDiv.innerHTML = `
+            <h3>${vaga.title}</h3>
+            <p><strong>Local:</strong> ${vaga.location || "Não informado"}</p>
+            <p><strong>Salário:</strong> ${vaga.salary || "Não informado"}</p>
+            <a href="${vaga.url}" target="_blank">Ver vaga</a>
+          `;
+          resultadosContainer.appendChild(vagaDiv);
+        });
+      } else {
+        resultadosContainer.innerHTML = "<p>Nenhuma vaga encontrada.</p>";
+      }
+    })
+    .catch(error => {
+      console.error("Erro na API:", error);
+      resultadosContainer.innerHTML = "<p>Erro ao carregar vagas.</p>";
+    });
+});
+</script>
+</body>
+</html>
